@@ -3,31 +3,35 @@ const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 14;
 const HEAL_VALUE = 20;
 
+// CONSTANTS MODE 
 const MODE_ATTACK = 'ATTACK'; // MODE_ATTACK = 0
 const MODE_STRONG_ATTACK = 'STRONG_ATTACK'; // MODE_STRONG_ATTACK = 1
 
+// CONSTANTS LOGS
 const LOG_EVENT_PLAYER_ATTACK = 'PLAYER_ATTACK';
 const LOG_EVENT_PLAYER_STRONG_ATTACK = 'PLAYER_STRONG_ATTACK';
 const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME_OVER';
 
-/* const enteredValue = prompt('Life', 100)
+function getMaxLifeValues() {
+    const enteredValue = prompt('Life', '100');
 
-let chosenMaxLife = parseInt(enteredValue);
-
-if(isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
-    chosenMaxLife = 100;
+    const parsedValue = parseInt(enteredValue);
+    if(isNaN(parsedValue) || parsedValue <= 0) {
+        throw {message: 'Invalid user input, not a number'};
+    }
+    return parsedValue;
 }
- */
 
-let chosenMaxLife = 100;
+let chosenMaxLife = getMaxLifeValues();
+
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
+
 let hasBonusLife = true;
 let battleLog = [];
 let lastLoggedEntry;
-// console.log('LOG', battleLog)
 
 adjustHealthBars(chosenMaxLife);
 
@@ -39,6 +43,7 @@ function writeLog(event, value, monsterHealth, playerHealt) {
         finalPlayerHealth: playerHealt
     };
 
+    // SWITCH CASE - LOGS
     switch (event) {
         case LOG_EVENT_PLAYER_ATTACK:
             logEntry.target = 'MONSTER';
@@ -81,6 +86,7 @@ function writeLog(event, value, monsterHealth, playerHealt) {
         default:
             logEntry = {};
     }
+    // IF AND ELSE IF - LOGS
 
     /* if(event === LOG_EVENT_PLAYER_ATTACK) {
         logEntry.target = 'MONSTER'
@@ -120,8 +126,8 @@ function writeLog(event, value, monsterHealth, playerHealt) {
 }
 
 function reset() {
-    currentMonsterHealth = chosenMaxLife;
-    currentPlayerHealth = chosenMaxLife;
+    currentMonsterHealth = chosenMaxLife; // 100 pts
+    currentPlayerHealth = chosenMaxLife; // 100 pts
     hasBonusLife = true;
     resetGame(chosenMaxLife);
 }
@@ -174,7 +180,6 @@ function endRound() {
         );
         reset();
     }
-
     /* if ( currentMonsterHealth <= 0 || currentPlayerHealth <=0) {
         reset();
     } */
@@ -239,9 +244,16 @@ function printLogHandler() {
         console.log('----------')
     }
 
-    let j = 3
-    do {
-        console.log(j)
+    let j = 0
+    outherWhile: do {  // Labeled Statements
+        console.log('Outer', j)
+        innerFor: for(let k = 0; k < 5; k++) { // Labeled Statements
+            if (k === 3) {
+                break outherWhile;
+                // continue outherWhile  // This is dangerous - Infinite Loop!
+            }
+            console.log('Inner', k)
+        }
         j++;
     } while (j < 3);
 
