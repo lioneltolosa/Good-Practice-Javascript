@@ -24,7 +24,6 @@ function getMaxLifeValues() {
     return parsedValue;
 }
 
-
 let chosenMaxLife;
 
 try {
