@@ -185,3 +185,25 @@ const filterArray = testResultInclude.filter((price, index, prices) => {
 const filterArrayShort = testResultInclude.filter(price => price > 3);
 
 console.log(filterArray, filterArrayShort)
+
+
+
+
+
+// SPREAD OPERATOR
+
+const persons = [
+    {name: 'Lionel', age: 32},
+    {name: 'Andrea', age: 32},
+    {name: 'Mateo', age: 2}
+];
+
+const copiePersons = [
+    ...persons.map((person) => ({ name: person.name, age: person.age }))];
+
+persons.push({name: 'Valentina', age: 30});
+
+persons[0].age = 90;
+
+console.log('Origi Persons', persons);
+console.log('Copie Persons', copiePersons);
