@@ -34,8 +34,6 @@ try {
     //ssthrow error;
 }
  
-
-
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;
 
