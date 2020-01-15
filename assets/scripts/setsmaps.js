@@ -7,7 +7,7 @@ for(const entries of ids.entries()) {
     console.log(entries[1])
 } */
 
-const person1 = {name: 'Lionel'};
+/* const person1 = {name: 'Lionel'};
 const person2 = {name: 'Miguel'};
 
 const personData = new Map([[person1, [{date: 'Monday', time: '4:00 PM'}]]]);
@@ -29,4 +29,19 @@ for (const [key, value] of personData.entries()) {
 
 for (const key of personData.keys()) {
     console.log(key)
+} */
+
+
+
+function writeLogs(event, value) {
+    /* let logEntries = {
+        event: event,
+        value: value,
+        monster: monster,
+        player: player
+    } */
+    return event * value;
 }
+
+const result = writeLogs(2, 2);
+console.log(result)

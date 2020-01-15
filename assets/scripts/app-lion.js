@@ -1,5 +1,6 @@
 const ATTACK_VALUE = 10;
-const STRONG_ATTACK_VALUE = 15
+const STRONG_ATTACK_VALUE = 15;
+const MONSTER_ATTACK_VALUE = 14;
 
 const MODE_ATTACK = 'ATTACK'; // MODE_ATTACK = 0
 const MODE_STRONG_ATTACK = 'STRONG_ATTACK'; // MODE_STRONG_ATTACK = 1
@@ -10,25 +11,42 @@ let currentPlayerHealth = chosenMaxLife;
 
 adjustHealthBars(chosenMaxLife);
 
-function genericAttackHandler(mode) {
-    const maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
-
-    /* if(mode === MODE_ATTACK) {
-        maxDamage = ATTACK_VALUE;
-    } else if (mode === MODE_STRONG_ATTACK) {
-        maxDamage = STRONG_ATTACK_VALUE;
-    } */
-
-    const damage = dealMonsterDamage(maxDamage);
-    currentMonsterHealth = dealMonsterDamage - damage;
-    const damagePlayer = dealPlayerDamage(maxDamage);
+function endRound() {
+    const initialPlayerHealth = currentPlayerHealth;
+    const damagePlayer = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth = dealPlayerDamage - damagePlayer;
 
     if(currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
+        alert('You Won');
+    } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
+        alert('You Lose');
+    } else if (currentMonsterHealth <= 0 && currentPlayerHealth >= 0) {
+        alert('You hace a draw')
+    }
+}
+
+function genericAttackHandler(mode) {
+    // const maxDamage = mode === MODE_ATTACK ? ATTACK_VALUE : STRONG_ATTACK_VALUE;
+
+    if(mode === MODE_ATTACK) {
+        maxDamage = ATTACK_VALUE;
+    } else if (mode === MODE_STRONG_ATTACK) {
+        maxDamage = STRONG_ATTACK_VALUE;
+    }
+
+    const damage = dealMonsterDamage(maxDamage);
+    currentMonsterHealth = dealMonsterDamage - damage;
+
+/*     const damagePlayer = dealPlayerDamage(maxDamage);
+    currentPlayerHealth = dealPlayerDamage - damagePlayer; */
+
+   /*  if(currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert('You Win')
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
         alert('You Lost')
-    }
+    } */
+
+    endRound();
 }
 
 function attackHandler() {
